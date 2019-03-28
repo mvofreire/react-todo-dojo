@@ -33,3 +33,39 @@ exports[`Testando Component <Item /> Item Component to match snapshot 1`] = `
   </button>
 </div>
 `;
+
+exports[`Testando Component <Item /> Valida Snapshot de Item completo: completo 1`] = `
+<div
+  className="item-todo"
+>
+  <input
+    checked={true}
+    className="check-todo-complete"
+    disabled={true}
+    type="checkbox"
+  />
+  <span
+    className="todo-label"
+    style={
+      Object {
+        "textDecoration": "line-through",
+      }
+    }
+  >
+    Teste
+  </span>
+  <button
+    className="todo-complete"
+    disabled={true}
+    onClick={[Function]}
+  >
+    ✔
+  </button>
+  <button
+    className="todo-remove"
+    onClick={[Function]}
+  >
+    ✘
+  </button>
+</div>
+`;

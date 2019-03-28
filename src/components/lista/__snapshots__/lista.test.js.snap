@@ -5,3 +5,11 @@ exports[`Testando Component <Lista /> e <Item /> Item Component to match snapsho
   className="lista"
 />
 `;
+
+exports[`Testando Component <Lista /> e <Item /> Item Component to match snapshot com Children: children 1`] = `
+<div
+  className="lista"
+>
+  Teste
+</div>
+`;

@@ -25,3 +25,55 @@ exports[`Component Form - <Form/> <Form/> Match Snapshoot 1`] = `
   </button>
 </div>
 `;
+
+exports[`Component Form - <Form/> Valida se Botao ADD aparece: pode adicionar 1`] = `
+<div
+  className="form-todo"
+>
+  <br />
+  <input
+    className="input-form-todo"
+    onChange={[Function]}
+    onKeyUp={[Function]}
+    value=""
+  />
+  <button
+    className="btn btn-add"
+    onClick={[Function]}
+  >
+    Adicionar
+  </button>
+  <button
+    className="btn btn-clear"
+    onClick={[Function]}
+  >
+    Limpar
+  </button>
+</div>
+`;
+
+exports[`Component Form - <Form/> Valida se Botao ADD não aparece: nao pode adicionar 1`] = `
+<div
+  className="form-todo"
+>
+  <br />
+  <input
+    className="input-form-todo"
+    onChange={[Function]}
+    onKeyUp={[Function]}
+    value=""
+  />
+  <button
+    className="btn btn-add"
+    onClick={[Function]}
+  >
+    Adicionar
+  </button>
+  <button
+    className="btn btn-clear"
+    onClick={[Function]}
+  >
+    Limpar
+  </button>
+</div>
+`;

@@ -4,7 +4,7 @@ import { mount } from "enzyme";
 import { stub } from "sinon";
 import { create } from "react-test-renderer";
 
-import { Form, ENTER_CODE, ESC_CODE } from ".";
+import { Form, ENTER_CODE, ESC_CODE, MESSAGES } from ".";
 
 describe("Component Form - <Form/>", () => {
   it("Component <Form/> renderiza sem erros", () => {
@@ -39,9 +39,34 @@ describe("Component Form - <Form/>", () => {
   it("Valida se titulo foi digitado quando tenta adicionar TODO", () => {
     const wrapper = mount(<Form />);
     const btnAdd = wrapper.find("button.btn-add").first();
-    //Tenta adicionar TODO sem valor de titulo
-    btnAdd.simulate("click");
+    btnAdd.simulate("click"); //Tenta adicionar TODO sem valor de titulo
     expect(wrapper.find("span.error").length).toEqual(1);
+    expect(wrapper.find("span.error").text()).toContain(MESSAGES.ERROR_TITULO);
+  });
+
+  it("Valida se Bloqueia Adição com prop canAdd = false", () => {
+    const wrapper = mount(<Form canAdd={false} />);
+    const btnAdd = wrapper.find("button.btn-add").first();
+    const input = wrapper.find("input");
+    let state = wrapper.state();
+
+    expect(state.error).toBeFalsy();
+    input.simulate("change", { target: { value: "foo" } });
+    btnAdd.simulate("click");
+
+    state = wrapper.state();
+    expect(state.error).toBeTruthy();
+    expect(wrapper.find("span.error").text()).toContain(MESSAGES.ERROR_TITULO);
+  });
+
+  it("Valida se Botao ADD aparece", () => {
+    const wrapper = create(<Form />);
+    expect(wrapper.toJSON()).toMatchSnapshot("pode adicionar");
+  });
+
+  it("Valida se Botao ADD não aparece", () => {
+    const wrapper = create(<Form canAdd={false} />);
+    expect(wrapper.toJSON()).toMatchSnapshot("nao pode adicionar");
   });
 
   it("Valida se erro é apagado apos começar a digitar novamente", () => {
@@ -91,7 +116,6 @@ describe("Component Form - <Form/>", () => {
 
   it("<Form/> Match Snapshoot", () => {
     const wrapper = create(<Form />);
-
     expect(wrapper.toJSON()).toMatchSnapshot();
   });
 

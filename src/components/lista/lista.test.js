@@ -16,6 +16,11 @@ describe("Testando Component <Lista /> e <Item />", () => {
     expect(wrapper.text()).toContain("Teste de children");
   });
 
+  it("Item Component to match snapshot com Children", () => {
+    const wrapper = create(<Lista>Teste</Lista>);
+    expect(wrapper.toJSON()).toMatchSnapshot("children");
+  });
+
   it("Item Component to match snapshot", () => {
     const wrapper = create(<Lista />);
     expect(wrapper.toJSON()).toMatchSnapshot();

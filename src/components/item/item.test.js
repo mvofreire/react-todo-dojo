@@ -40,6 +40,11 @@ describe("Testando Component <Item />", () => {
     expect(check).toEqual(true);
   });
 
+  it("Valida Snapshot de Item completo", () => {
+    const wrapper = create(<Item {...props} complete={true} />);
+    expect(wrapper.toJSON()).toMatchSnapshot("completo")
+  });
+
   it("Item Component to match snapshot", () => {
     const wrapper = create(<Item {...props} />);
     expect(wrapper.toJSON()).toMatchSnapshot();

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component Form - <Form/> <Form/> Match Snapshoot 1`] = `
+<div
+  className="form-todo"
+>
+  <br />
+  <input
+    className="input-form-todo"
+    onChange={[Function]}
+    onKeyUp={[Function]}
+    value=""
+  />
+  <button
+    className="btn btn-add"
+    onClick={[Function]}
+  >
+    Adicionar
+  </button>
+  <button
+    className="btn btn-clear"
+    onClick={[Function]}
+  >
+    Limpar
+  </button>
+</div>
+`;

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testando Component <Lista /> e <Item /> Item Component to match snapshot 1`] = `
+<div
+  className="lista"
+/>
+`;

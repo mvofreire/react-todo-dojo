@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testando Component <Item /> Item Component to match snapshot 1`] = `
+<div
+  className="item-todo"
+>
+  <input
+    className="check-todo-complete"
+    disabled={true}
+    type="checkbox"
+  />
+  <span
+    className="todo-label"
+    style={
+      Object {
+        "textDecoration": "",
+      }
+    }
+  >
+    Teste
+  </span>
+  <button
+    className="todo-complete"
+    onClick={[Function]}
+  >
+    ✔
+  </button>
+  <button
+    className="todo-remove"
+    onClick={[Function]}
+  >
+    ✘
+  </button>
+</div>
+`;

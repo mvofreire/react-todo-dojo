@@ -1,0 +1,71 @@
+.App {
+  text-align: center;
+}
+
+/* # FORM */
+
+.form-todo {
+  position: relative;
+  width: 965px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+
+
+.error {
+  font-size: 10px;
+  color: red;
+}
+
+.input-form-todo {
+  line-height: 30px;
+  width: 460px;
+  margin-right: 8px;
+}
+
+.btn {
+  height: 30px;
+}
+
+/* # FORM*/
+
+.todo-empty {
+  color: #ddd;
+  margin-top: 30px;
+}
+
+.lista {
+  padding: 5px;
+  width: 600px;
+  margin: auto;
+  display: flex;
+  flex-flow: column;
+}
+
+.item-todo {
+  width: 100%;
+  line-height: 40px;
+  margin: 2px 0px;
+  padding: 0px 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 0px 0px 1px #ddd;
+}
+
+.item-todo:hover{
+  background: #f3f3f3;
+}
+
+.item-todo input[type="checkbox"] {
+  flex: 1;
+}
+.item-todo > span {
+  flex: 12;
+}
+.item-todo button {
+  flex: 1;
+  text-align: center;
+}

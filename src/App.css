@@ -1,3 +1,5 @@
+/* #region App*/
+
 .App {
   text-align: center;
 }
@@ -7,7 +9,9 @@
   text-decoration: underline;
   cursor: pointer;
 }
-/* # FORM */
+/* #endregion */
+
+/* #region FORM */
 
 .form-todo {
   position: relative;
@@ -31,8 +35,9 @@
   height: 30px;
 }
 
-/* # FORM*/
+/* #endregion */
 
+/* #region LISTA*/
 .todo-empty {
   color: #ddd;
   margin-top: 30px;
@@ -45,7 +50,9 @@
   display: flex;
   flex-flow: column;
 }
+/* #endregion */
 
+/* #region ITEM TODO*/
 .item-todo {
   width: 100%;
   line-height: 40px;
@@ -67,11 +74,16 @@
 }
 .item-todo > span {
   flex: 12;
+  text-align: left;
+  align-items: center;
+  vertical-align: middle;
+  line-height: 40px;
 }
 .item-todo button {
   flex: 1;
   text-align: center;
 }
+/* #endregion */
 
 /*#region LOGIN*/
 

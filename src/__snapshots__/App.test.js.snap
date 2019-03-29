@@ -1,6 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<App /> Component App to match snapshot 1`] = `
+exports[`<App /> Component App Component to match snapshot Logado: logado 1`] = `
+<div
+  className="App"
+>
+  <h1>
+    TODO List App
+  </h1>
+  <span
+    className="link-logout"
+    onClick={[Function]}
+  >
+    logout (
+    Teste
+    )
+  </span>
+  <div
+    className="App"
+  >
+    <div
+      className="form-todo"
+    >
+      <br />
+      <input
+        className="input-form-todo"
+        onChange={[Function]}
+        onKeyUp={[Function]}
+        value=""
+      />
+      <button
+        className="btn btn-add"
+        onClick={[Function]}
+      >
+        Adicionar
+      </button>
+      <button
+        className="btn btn-clear"
+        onClick={[Function]}
+      >
+        Limpar
+      </button>
+    </div>
+    <div
+      className="lista"
+    />
+    <span
+      className="todo-empty"
+    >
+      Ainda nao foi cadastrado nenhum TODO
+    </span>
+  </div>
+</div>
+`;
+
+exports[`<App /> Component App Component to match snapshot: deslogado 1`] = `
 <div
   className="App"
 >
@@ -8,35 +61,102 @@ exports[`<App /> Component App to match snapshot 1`] = `
     TODO List App
   </h1>
   <div
-    className="form-todo"
+    className="login"
   >
-    <br />
     <input
-      className="input-form-todo"
+      autoComplete="off"
+      className="username"
+      name="username"
       onChange={[Function]}
-      onKeyUp={[Function]}
-      value=""
+      placeholder="Usuario"
+      type="text"
+    />
+    <input
+      autoComplete="off"
+      className="password"
+      name="password"
+      onChange={[Function]}
+      placeholder="Senha"
+      type="password"
     />
     <button
-      className="btn btn-add"
+      className="btn btn-login"
       onClick={[Function]}
     >
-      Adicionar
-    </button>
-    <button
-      className="btn btn-clear"
-      onClick={[Function]}
-    >
-      Limpar
+      Login
     </button>
   </div>
+</div>
+`;
+
+exports[`<App /> Component altera visualizacao apos deslogar: deslogado 1`] = `
+<div
+  className="App"
+>
+  <h1>
+    TODO List App
+  </h1>
   <div
-    className="lista"
-  />
-  <span
-    className="todo-empty"
+    className="login"
   >
-    Ainda nao foi cadastrado nenhum TODO
-  </span>
+    <input
+      autoComplete="off"
+      className="username"
+      name="username"
+      onChange={[Function]}
+      placeholder="Usuario"
+      type="text"
+    />
+    <input
+      autoComplete="off"
+      className="password"
+      name="password"
+      onChange={[Function]}
+      placeholder="Senha"
+      type="password"
+    />
+    <button
+      className="btn btn-login"
+      onClick={[Function]}
+    >
+      Login
+    </button>
+  </div>
+</div>
+`;
+
+exports[`<App /> Component valida localstorage quando recarrega: logado 1`] = `
+<div
+  className="App"
+>
+  <h1>
+    TODO List App
+  </h1>
+  <div
+    className="login"
+  >
+    <input
+      autoComplete="off"
+      className="username"
+      name="username"
+      onChange={[Function]}
+      placeholder="Usuario"
+      type="text"
+    />
+    <input
+      autoComplete="off"
+      className="password"
+      name="password"
+      onChange={[Function]}
+      placeholder="Senha"
+      type="password"
+    />
+    <button
+      className="btn btn-login"
+      onClick={[Function]}
+    >
+      Login
+    </button>
+  </div>
 </div>
 `;

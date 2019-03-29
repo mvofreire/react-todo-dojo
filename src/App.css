@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.link-logout {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
 /* # FORM */
 
 .form-todo {
@@ -10,8 +15,6 @@
   margin: auto;
   margin-bottom: 30px;
 }
-
-
 
 .error {
   font-size: 10px;
@@ -55,7 +58,7 @@
   box-shadow: 0px 0px 0px 1px #ddd;
 }
 
-.item-todo:hover{
+.item-todo:hover {
   background: #f3f3f3;
 }
 
@@ -69,3 +72,35 @@
   flex: 1;
   text-align: center;
 }
+
+/*#region LOGIN*/
+
+.login {
+  background: #f1f1f1;
+  width: 300px;
+  margin: auto;
+  padding: 30px 50px;
+  border: solid 1px #ddd;
+  border-radius: 4px;
+  display: flex;
+  flex-flow: column;
+}
+.login > input {
+  line-height: 30px;
+}
+.login > .username {
+  margin: 20px;
+}
+.login > .password {
+  margin: 20px;
+}
+
+.login > .btn-login {
+  margin: 20px;
+}
+
+.login > .login-error {
+  margin: 20px;
+  color: red;
+}
+/*#endregion*/

@@ -23,17 +23,19 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
+      "!src/services/**/*",
       "!<rootDir>/node_modules/",
+      "!<rootDir>/config/",
       "!src/setupTests.js",
       "!src/index.js",
       "!src/serviceWorker.js"
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 70,
-        "functions": 70,
-        "lines": 70,
-        "statements": 70
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
       }
     }
   },
@@ -44,6 +46,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "ava": "^1.4.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "react-test-renderer": "^16.8.5"

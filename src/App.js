@@ -1,45 +1,47 @@
-import React, { useState } from "react";
-import { Lista, Item, Form } from "components";
-
+import React, { Component } from "react";
+import { TodoListApp, Login } from "./application";
 import "./App.css";
 
-const App = () => {
-  const [todos, setTodos] = useState([]);
-
-  const addTodo = todo => {
-    setTodos([...todos, todo]);
+class App extends Component {
+  state = {
+    user: false
   };
 
-  const onRemoveTodo = index => {
-    todos.splice(index, 1);
-    setTodos([...todos]);
+  componentDidMount() {
+    this.validateLoggedUser();
+  }
+
+  validateLoggedUser = () => {
+    if (localStorage && "user" in localStorage) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      this.setUser(user);
+    }
   };
 
-  const onCompleteTodo = index => {
-    const _todos = [...todos];
-    _todos[index].complete = true;
-    setTodos(_todos);
+  setUser = user => {
+    this.setState({ user }, _ => {
+      localStorage && localStorage.setItem("user", JSON.stringify(user));
+    });
   };
 
-  return (
-    <div className="App">
-      <h1>TODO List App</h1>
-      <Form onCreate={addTodo} todos={todos} />
-      <Lista>
-        {todos.map((todo, i) => (
-          <Item
-            key={i}
-            {...todo}
-            onComplete={_ => onCompleteTodo(i)}
-            onRemove={_ => onRemoveTodo(i)}
-          />
-        ))}
-      </Lista>
-      {todos.length === 0 && (
-        <span className="todo-empty">Ainda nao foi cadastrado nenhum TODO</span>
-      )}
-    </div>
-  );
-};
+  logout = () => {
+    this.setUser(false);
+  };
+
+  render() {
+    const { user } = this.state;
+    return (
+      <div className="App">
+        <h1>TODO List App</h1>
+        {user && (
+          <span className="link-logout" onClick={this.logout}>
+            logout ({user.nome})
+          </span>
+        )}
+        {!!user ? <TodoListApp /> : <Login onAuthenticate={this.setUser} />}
+      </div>
+    );
+  }
+}
 
 export default App;

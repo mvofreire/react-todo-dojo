@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Login, MESSAGES } from ".";
 import { shallow, mount } from "enzyme";
-import { create } from "react-test-renderer";
 
 jest.mock("services/login.service");
 

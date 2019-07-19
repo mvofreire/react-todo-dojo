@@ -1,3 +1,7 @@
+import Axios from "axios";
+
 export const doLogin = ({ username, password }) => {
-  return Promise.resolve({ nome: username });
+  return Axios.post("ENDPOINT", { username, password }).then(
+    ({ data }) => data
+  );
 };

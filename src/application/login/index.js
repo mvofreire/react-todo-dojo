@@ -1,88 +1,65 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { doLogin } from "services/login.service";
 
-export const MESSAGES = {
-  FORM_ERROR: "Preencha todos os campos",
-  REQUEST_ERROR: ""
-};
-
 class Login extends Component {
-  static propTypes = {
-    onAuthenticate: PropTypes.func.isRequired
-  };
-
   state = {
-    error: false,
-    login: {}
+    model: {
+      username: "",
+      password: ""
+    }
   };
 
-  onChangeInput = e => {
-    const { name, value } = e.target;
+  onChange = (e, name) => {
+    const { value } = e.target;
+
     this.setState({
-      login: {
-        ...this.state.login,
+      model: {
+        ...this.state.model,
         [name]: value
       }
     });
   };
 
-  makeLogin = async () => {
+  onSubmit = async () => {
+    const { username, password } = this.state.model;
     const { onAuthenticate } = this.props;
-    const { login } = this.state;
 
-    if (this.validate()) {
-      this.setError(MESSAGES.FORM_ERROR);
-    } else {
-      try {
-        const result = await doLogin(login);
-        onAuthenticate && onAuthenticate(result);
-      } catch (error) {
-        this.setError(MESSAGES.REQUEST_ERROR);
+    try {
+      if (username === "" || password === "") {
+        throw "Login e senha nao preenchidos";
+      } else {
+        const result = await doLogin({ username, password });
+        this.setState({ hasError: false });
+        onAuthenticate(result);
       }
+    } catch (error) {
+      this.setState({
+        hasError: true
+      });
     }
   };
 
-  validate = () => {
-    const { login } = this.state;
-    return !!login.username === false || !!login.password === false;
-  };
-
-  setError = error => {
-    this.setState({
-      error
-    });
-  };
-
   render() {
-    const { login, error } = this.state;
+    const { model, hasError } = this.state;
     return (
-      <div className="login">
+      <div>
         <input
-          defaultValue={login.username}
           name="username"
-          placeholder="Usuario"
-          type="text"
-          autoComplete="off"
-          className="username"
-          onChange={this.onChangeInput}
+          className="login_username"
+          onChange={e => this.onChange(e, "username")}
+          value={model.username}
         />
         <input
-          name="password"
-          defaultValue={login.password}
           type="password"
-          placeholder="Senha"
-          className="password"
-          autoComplete="off"
-          onChange={this.onChangeInput}
+          className="login_password"
+          onChange={e => this.onChange(e, "password")}
+          value={model.password}
         />
-        <button onClick={this.makeLogin} className="btn btn-login">
-          Login
-        </button>
-        {error !== false && <span className="login-error">{error}</span>}
+        <button onClick={this.onSubmit} />
+        {hasError && <label>Erro</label>}
       </div>
     );
   }
 }
 
-export { Login };
+export default Login;

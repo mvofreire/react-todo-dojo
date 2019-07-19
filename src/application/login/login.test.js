@@ -1,104 +1,126 @@
+import axios from "axios";
 import React from "react";
 import ReactDOM from "react-dom";
-import { Login, MESSAGES } from ".";
 import { shallow, mount } from "enzyme";
+import Login from ".";
 
 jest.mock("services/login.service");
-
-describe("<Login /> Component", () => {
-  const props = {
-    onAuthenticate: () => {}
-  };
-
-  it("renderiza sem erros", () => {
+jest.mock("axios");
+describe("<Login />", () => {
+  it("deve renderizar component sem error", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<Login {...props} />, div);
-    ReactDOM.unmountComponentAtNode(div);
+    ReactDOM.render(<Login />, div);
   });
 
-  it("renderiza inputs e botoes", () => {
-    const wrapper = shallow(<Login {...props} />);
-
-    expect(wrapper.find("input.username").length).toEqual(1);
-    expect(wrapper.find("input.password").length).toEqual(1);
-    expect(wrapper.find("button.btn-login").length).toEqual(1);
+  it("deve possuir campo de username", () => {
+    var component = mount(<Login />);
+    expect(component.find("input.login_username").length).toBe(1);
   });
 
-  it("guarda valor digitado em username e password no state", () => {
-    const wrapper = mount(<Login {...props} />);
+  it("deve possuir campo de password", () => {
+    var component = mount(<Login />);
 
-    const inputUsername = wrapper.find("input.username");
-    const inputPassword = wrapper.find("input.password");
+    expect(component.find("input.login_password").length).toBe(1);
+  });
 
-    inputUsername.simulate("change", {
-      target: { name: "username", value: "admin" }
+  it("deve possuir botao", () => {
+    var component = mount(<Login />);
+
+    expect(component.find("button").length).toBe(1);
+  });
+
+  it("deve salvar valor de username", () => {
+    var component = mount(<Login />);
+    const input = component.find("input.login_username");
+
+    input.simulate("change", {
+      target: {
+        value: "teste"
+      }
     });
-    inputPassword.simulate("change", {
-      target: { name: "password", value: "123" }
-    });
-
-    const { login } = wrapper.state();
-
-    expect(login.username).toEqual("admin");
-    expect(login.password).toEqual("123");
+    expect(input.instance().value).toBe("teste");
   });
 
-  it("mostra erro se tentar logar sem username ou password", done => {
-    const wrapper = mount(<Login {...props} />);
+  it("deve salvar valor de password", () => {
+    var component = mount(<Login />);
+    const input = component.find("input.login_password");
 
-    let state = wrapper.state();
+    input.simulate("change", {
+      target: {
+        value: "123123"
+      }
+    });
+    expect(input.instance().value).toBe("123123");
+  });
 
-    wrapper.find("button.btn-login").simulate("click");
-    expect(state.error).toBeFalsy();
+  it("tem mensagem de erro", () => {
+    var component = mount(<Login />);
+    const button = component.find("button");
+
+    button.simulate("click");
+
+    expect(component.instance().state.hasError).toBe(true);
+    expect(component.find("label").length).toBeGreaterThan(0);
+  });
+
+  it("retornar erro quando falha na requisicao login", done => {
+    var component = mount(<Login />);
+    const username = component.find("input.login_username");
+    const password = component.find("input.login_password");
+    const button = component.find("button");
+
+    username.simulate("change", {
+      target: {
+        value: "user-error"
+      }
+    });
+
+    password.simulate("change", {
+      target: {
+        value: "123"
+      }
+    });
+
+    button.simulate("click");
 
     setTimeout(() => {
-      state = wrapper.state();
-      expect(state.error).toBe(MESSAGES.FORM_ERROR);
-      expect(wrapper.find(".login-error").length).toBe(1);
+      component.update();
+
+      expect(component.instance().state.hasError).toBe(true);
+      expect(component.find("label").length).toBeGreaterThan(0);
+
       done();
     });
   });
 
-  it("mostra erro quando o servidor responde com falha de login", done => {
-    const onAuthenticate = jest.fn();
-    const wrapper = mount(<Login onAuthenticate={onAuthenticate} />);
-    const inputUsername = wrapper.find("input.username");
-    const inputPassword = wrapper.find("input.password");
+  it("chama callback onAuthenticate", done => {
+    const callback = jest.fn();
+    var component = mount(<Login onAuthenticate={callback} />);
+    const username = component.find("input.login_username");
+    const password = component.find("input.login_password");
+    const button = component.find("button");
 
-    inputUsername.simulate("change", {
-      target: { name: "username", value: "Error" }
-    });
-    inputPassword.simulate("change", {
-      target: { name: "password", value: "123" }
+    username.simulate("change", {
+      target: {
+        value: "user-correct"
+      }
     });
 
-    wrapper.find("button.btn-login").simulate("click");
+    password.simulate("change", {
+      target: {
+        value: "123"
+      }
+    });
+
+    button.simulate("click");
+
     setTimeout(() => {
-      wrapper.update();
-      const { error } = wrapper.state();
-      expect(onAuthenticate).toHaveBeenCalledTimes(0);
-      expect(wrapper.find(".login-error").length).toBe(1);
-      expect(error).toBe(MESSAGES.REQUEST_ERROR);
-      done();
-    });
-  });
+      component.update();
 
-  it("chama callback onAuthenticate quando clica em logar", done => {
-    const onAuthenticate = jest.fn();
-    const wrapper = mount(<Login onAuthenticate={onAuthenticate} />);
-    const inputUsername = wrapper.find("input.username");
-    const inputPassword = wrapper.find("input.password");
-
-    inputUsername.simulate("change", {
-      target: { name: "username", value: "admin" }
-    });
-    inputPassword.simulate("change", {
-      target: { name: "password", value: "123" }
-    });
-
-    wrapper.find("button.btn-login").simulate("click");
-    setTimeout(() => {
-      expect(onAuthenticate).toHaveBeenCalledTimes(1);
+      expect(component.instance().state.hasError).toBe(false);
+      expect(component.find("label").length).toBe(0);
+      expect(callback).toBeCalledTimes(1);
+      expect(callback).toBeCalledWith({ id: 123 });
       done();
     });
   });

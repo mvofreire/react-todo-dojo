@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TodoListApp, Login } from "./application";
+import { TodoListApp } from "./application";
 import "./App.css";
 
 class App extends Component {
@@ -29,16 +29,10 @@ class App extends Component {
   };
 
   render() {
-    const { user } = this.state;
     return (
       <div className="App">
         <h1>TODO List App</h1>
-        {user && (
-          <span className="link-logout" onClick={this.logout}>
-            logout ({user.nome})
-          </span>
-        )}
-        {!!user ? <TodoListApp /> : <Login onAuthenticate={this.setUser} />}
+        <TodoListApp />
       </div>
     );
   }
